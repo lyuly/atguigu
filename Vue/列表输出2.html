@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <title>列表输出2</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.min.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <ul id="example">
+        <li v-for="(item, index) in items" :key="index">
+          {{ parentMessage }} - {{ index }} - {{ item.message }}
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      var example = new Vue({
+        el: '#example',
+        data: {
+          parentMessage: 'Daydayup',
+          items: [
+            { message: 'www.baidu.com' },
+            { message: 'www.google.com' }
+          ]
+        }
+      })
+    </script>
+  </body>
+</html>

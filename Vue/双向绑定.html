@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <title>双向绑定</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.min.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <!-- 字符串连接 -->
+      <p>{{ message + '官网地址: www.baidu.com' }}</p>
+      <!-- 字符串反转 -->
+      <p>{{ message.split('').reverse().join('') }}</p>
+      <input v-model="message" type="text" />
+    </div>
+    
+    <script>
+      new Vue({
+        el: '#app',
+        data: {
+          message: '百度一下!!!'
+        }
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <title>条件判断</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.min.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1 v-if="ok">表白成功</h1>
+      <h1 v-else="!ok">表白失败</h1>
+
+      <h1 v-show="ok">😄</h1>
+      <h1 v-show="!ok">😭</h1>
+
+      <button @click="ok=!ok">切换</button>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: '#app',
+        data: {
+          ok: false
+        }
+      })
+    </script>
+  </body>
+</html>

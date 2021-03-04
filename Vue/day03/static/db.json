@@ -1,0 +1,11 @@
+{
+    "success": true,
+    "message": "操作成功！",
+    "code": 0,
+    "result": [
+        {
+            "rejectTime": "2021-01-28T16:00:00.000+00:00",
+            "rejectReason": "格式不对"
+        }
+    ]
+}

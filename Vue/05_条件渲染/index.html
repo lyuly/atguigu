@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>
+            05_条件渲染
+        </title>
+        <script src="/js/vue.js"></script>
+    </head>
+
+<!-- v-show频繁切换 -->
+
+    <body>
+        <div id="demo">
+            <p v-if='ok'> 成功了😄 </p>
+            <p v-else> 失败了😞</p>
+
+            <p v-show="ok">表白成功</p>
+            <p v-show="!ok">表白失败</p>
+
+            <button @click="ok=!ok">切换</button>
+        </div>
+
+        <script>
+            new Vue({
+                el: '#demo',
+                data:{
+                    ok: false
+                }
+            })
+        </script>
+    </body>
+</html>

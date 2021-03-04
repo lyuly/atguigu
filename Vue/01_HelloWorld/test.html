@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>
+            01_HelloWorld
+        </title>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </head>
+
+    <body>
+
+        <div id="app">
+            <input type="text" v-model="username">
+            <p> 你好,我叫{{ username }}</p>
+        </div>
+
+        <div id="app1">
+            <h2> 1. 双大括号表达式</h2>
+            <p> {{ msg }} </p>
+            <p> {{ msg.toUpperCase() }}</p>
+            <p v-html='msg'></p>
+            <p v-text='msg'></p>
+
+            <h2> 2. 指令一：强制数据绑定</h2>
+            <img :src="imgUrl" style="height: 270px; width: 480px;">
+
+            <h2> 3. 指令二： 绑定时间监听</h2>
+            <button v-on:click="test">test1</button>
+            <button @click="test2(msg)">test2</button>
+        </div>
+
+
+        <div id="demo">
+            姓: <input type="text" placeholder="First Name" v-model="firstName"><br>
+            名: <input type="text" placeholder="Last Name" v-model="lastName"><br>
+            姓名1（单向) : <input type="text" placeholder="Full Name1" v-model="fullName1"><br>
+            姓名2（单向）: <input type="text" placeholder="Full Name2" v-model="fullName2"><br>
+            姓名3（双向）: <input type="text" placeholder="Full Name3" v-model="fullName3"><br>
+
+            <p>
+                {{ fullName1 }}
+                <br>
+                {{ fullName1 }}
+                <br>
+                {{ fullName1 }}
+            </p>
+        </div>
+
+        <script>
+
+            const vm = new Vue({
+                el: "#demo",
+                data: {
+                    firstName: 'A',
+                    lastName: 'B',
+                    //fullName: 'A B'
+                    fullName2: 'A B'
+                },
+                computed: {
+                    // 什么时候执行： 初始化显示/相关的data属性数据发生改变
+                    // 计算并返回当前属性的值
+                    fullName1 () { // 计算属性中的一个方法，方法的返回值作为属性值
+                        console.log('fullName1()')
+                        return this.firstName + ' ' + this.lastName
+                    },
+
+                    fullName3: {
+                        // 1. 你定义的 2. 你没有调用 3. 但最终它执行了
+                        // 2. 什么时候调用? 2. 用来做什么
+                        // 回调函数，当需要读取当前属性时回调，根据相关的数据计算并返回当前属性的值
+                        // 通过getter/setter实现对属性数据的系显示和监视
+                        // 计算属性存在缓存，多次读取只执行一个getter计算
+                        // getter: 属性的get方法
+                        // setter: 属性的set方法
+                        get() {
+                            return this.firstName + ' ' + this.lastName
+                        },
+                        // 回调函数，监视当前属性值的变化，当属性值发生改变时回调，更新相关的属性数据
+                        set(value) { // value就是fullName3的最新属性值
+                            const names = value.split(' ')
+                            this.firstName = names[0]
+                            this.lastName = names[1]
+                        }
+                    }
+                },
+
+                watch: { // 配置监视
+                    firstName: function (value) { // firstName发生了变化
+                        console.log(this) // 就是vm对象
+                        this.fullName2 = value + ' ' + this.lastName
+                    }
+                }
+            })
+
+            // 通过vm对象的$watch()或watch配置来监视指定的属性
+            // 当属性变化时，回调函数自动调用，在函数内部进行计算
+            vm.$watch('lastName' ,function (value) {
+                // 更新fullName2
+                this.fullName2 = this.firstName + ' ' + value
+            })
+
+            // 创建Vue实例
+            var app = new Vue({ // 配置对象
+                el: '#app', // element: 选择器
+                data: {
+                    username: '饭饭'
+                }
+            })
+
+            var app1 = new Vue({
+                el: '#app1',
+                data: {
+                    msg: '<a herf="https://lyuly.com"> I will wait for you</a>',
+                    imgUrl: '/image/6.jpg'
+                },
+                methods: {
+                    test() {
+                        alert('嘿嘿 😜')
+                    },
+                    test2(content) {
+                        alert(content)
+                    }
+                }
+            })
+
+        </script>
+
+    </body>
+</html>

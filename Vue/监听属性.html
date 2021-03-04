@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <title>监听属性</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.12/vue.min.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <p style="font-size: 25px;">计数器: {{ counter }}</p>
+      <button @click="counter++" style="font: 25px;">点我鸭</button>
+    </div>
+
+    <script type="text/javascript">
+      var vm = new Vue({
+        el: '#app',
+        data: {
+          counter: 1
+        }
+      })
+      vm.$watch('counter', function(newval, oldval) {
+        alert('计数器值的变化 : ' + oldval + ' 变为 ' + newval + '!')
+      })
+    </script>
+  </body>
+</html>

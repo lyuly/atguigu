@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>
+            10_过渡&动画
+        </title>
+        <script src="/js/vue.js"></script>
+
+        <style>
+            /* 显示隐藏过渡效果 */
+            .xxx-enter-active, .xxx-leave-active {
+                transition: opacity 1s;
+            }
+            .xxx-enter, .xxx-leave-to {
+                opacity: 0;
+            }
+
+            /* 显示的果过滤效果 */
+            .fans-enter-active {
+                transition: all 1s;
+            }
+
+            /* 隐藏的过滤效果 */
+            .fans-leave-active {
+                transition: all 3s;
+            }
+
+            /* 隐藏时的样式 */
+            .fans-enter, .fans-leave-to {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+
+            /* 可以设置不同的进入和离开动画 */
+            /* 设置持续时间和动画函数 */
+            .slide-fade-enter-active {
+                transition: all .3s ease;
+            }
+            .slide-fade-leave-active {
+                transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+            }
+            .slide-fade-enter, .slide-fade-leave-to {
+                transform: translateX(10px);
+                opacity: 0;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div id="example-1">
+            <button @click="show = !show">
+                Toggle render
+            </button>
+            <transition name="slide-fade">
+                <p v-if="show">人生得意须尽欢，莫使金樽空对月</p>
+            </transition>
+        </div>
+
+        <div id="app1">
+            <button @click="isShow=!isShow"> toggle</button>
+            <transition name="xxx">
+                <p v-show="isShow" class="xxx-enter-to">凡是过往</p>
+            </transition>
+        </div>
+
+        <div id="app2">
+            <button @click="isShow=!isShow"> uoggle</button>
+            <transition name="fans">
+                <p v-show="isShow" class="fans-enter-to">皆为序章</p>
+            </transition>
+        </div>
+
+        <script>
+            new Vue({
+                el: '#example-1',
+                data: {
+                    show: true
+                }
+            })
+
+            new Vue({
+                el: '#app1',
+                data() {
+                    return {
+                        isShow: true
+                    }
+                }
+            })
+
+            new Vue({
+                el: '#app2',
+                data() {
+                    return {
+                        isShow: true
+                    }
+                }
+            })
+        </script>
+
+    </body>
+</html>
