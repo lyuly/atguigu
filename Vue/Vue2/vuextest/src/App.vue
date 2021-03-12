@@ -1,36 +1,53 @@
 <template>
-  <div class="todo-container">
-    <div class="todo-wrap">
-      <TodoHeader/>
-      <TodoList/>
-      <TodoFooter/>
-    </div>
+  <div>
+    <p>click {{$store.state.count}} times, count is {{evenOrOdd}}</p>
+    <button @click="increment">+</button>
+    <button @click="decrement">-</button>
+    <button @click="incrementIfOdd">increment if odd</button>
+    <button @click="incrementAsync">increment async</button>
   </div>
 </template>
 
 <script>
-  import TodoHeader from './components/TodoHeader.vue'
-  import TodoList from './components/TodoList.vue'
-  import TodoFooter from './components/TodoFooter.vue'
 
+  import {mapState, mapGetters, mapActions} from 'vuex'
   export default {
 
-    components: {
-      TodoHeader,
-      TodoList,
-      TodoFooter
+    computed: {
+      ...mapState(['count']), // mapState()返回值: {count(){return this.$store.state['count']}}
+      ...mapGetters(['evenOrOdd']) // mapGetters()返回值: {evenOrOdd() {return this.$store.getters['evenOrOdd']}}
+    },
+
+    methods: {
+      ...mapActions(['increment', 'decrement', 'incrementIfOdd', 'incrementAsync'])
     }
+
+    /* methods: {
+      // 增加
+      increment () {
+        // 通知vuex去增加
+        this.$store.dispatch('increment') //  触发store中对应的action调用
+      },
+
+      // 减少
+      decrement () {
+        this.$store.dispatch('decrement')
+      },
+
+      // 如果是奇数才增加
+      incrementIfOdd () {
+        this.$store.dispatch('decrement')
+      },
+
+      // 过1s才增加
+      incrementAsync () {
+        this.$store.dispatch('incrementAsync')
+      }
+    } */
   }
+
 </script>
 
 <style>
-  .todo-container {
-    width: 600px;
-    margin: 0 auto;
-  }
-  .todo-container .todo-wrap {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
+
 </style>

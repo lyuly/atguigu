@@ -12,19 +12,27 @@
 
     // 读取器----负责读取数据的
     get fullName(){
+      console.log('get中...')
       // 姓名====>姓氏和名字的拼接
       return this.firstName+this.lastName
     }
 
     // 设置名----负责设置数据的(修改)
-    // set fullName() {
-    //   //  姓名---->把姓氏和名字获取到重新的复制给firstName和lastName
-    // }
+    set fullName(val) {
+      console.log('set中...')
+      //  姓名---->把姓氏和名字获取到重新的复制给firstName和lastName
+      let names = val.split('_')
+      this.firstName = names[0]
+      this.lastName = names[1]
+    }
   }
 
   // 实例化对象
   const person:Person = new Person('东方', '不败')
   console.log(person)
-  // 获取数据
+  // 获取该属性成员属性
+  console.log(person.fullName)
+  // 设置该属性的数据
+  person.fullName = '诸葛_孔明'
   console.log(person.fullName)
 })()
